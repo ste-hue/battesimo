@@ -44,11 +44,9 @@
     .canva-stage{position:relative}
     /* Use portrait ratio 9:16 like Canva's embed snippet */
     .canva-frame{width:100%; aspect-ratio: 9/16; border:0; border-radius:16px; overflow:hidden; background:#fff; box-shadow: var(--shadow); max-height:min(92dvh, 820px); margin:0 auto}
-    .canva-frame video{width:100%; height:100%; display:block; object-fit:cover; background:#000}
+    .canva-frame video{width:100%; height:100%; display:block; object-fit:contain; background:#000}
     .canva-overlay-cta{position:absolute; right:max(14px, env(safe-area-inset-right) + 12px); bottom:max(14px, env(safe-area-inset-bottom) + 12px); z-index:100; background:var(--brand); color:#fff; border:0; border-radius:999px; padding:14px 20px; font-weight:900; box-shadow:0 10px 22px rgba(17,24,39,.22); cursor:pointer}
     .canva-overlay-cta:focus{outline:3px solid var(--ring)}
-    .video-sound-toggle{position:absolute; left:max(14px, env(safe-area-inset-left) + 12px); bottom:max(14px, env(safe-area-inset-bottom) + 12px); z-index:100; background:rgba(31,41,55,.75); color:#fff; border:0; border-radius:999px; padding:10px 14px; font-weight:800; box-shadow:0 8px 18px rgba(17,24,39,.28); cursor:pointer; backdrop-filter: blur(4px)}
-    .video-sound-toggle:focus{outline:3px solid var(--ring)}
     /* Mobile: make Canva nearly full-screen (leaves room for sticky CTA) */
     @media (max-width:768px){
       .canva-frame{
@@ -100,9 +98,8 @@
     <section class="section" id="intro-canva">
       <div class="canva-stage">
         <button type="button" class="canva-overlay-cta" data-open-rsvp="true">RSVP now</button>
-        <button type="button" class="video-sound-toggle" id="video-sound-toggle" aria-pressed="false" aria-label="Unmute video">Sound on</button>
         <div class="canva-frame" aria-label="Invitation video">
-          <video id="invite-video" playsinline muted autoplay loop preload="auto" src="./Blue%20Watercolor%20Baby%20Baptism%20Invitation.mp4"></video>
+          <video id="invite-video" playsinline muted autoplay preload="auto" src="./Blue%20Watercolor%20Baby%20Baptism%20Invitation.mp4"></video>
         </div>
       </div>
       <p class="address"><a href="https://www.google.com/maps/place/Santuario+Santa+Maria+a+Mare/@40.6500664,14.6412516,17z/data=!3m1!4b1!4m6!3m5!1s0x133b9544093c35a3:0x35b98a06ca815918!8m2!3d40.6500664!4d14.6412516!16s%2Fg%2F1tdjfd25?hl=it-IT&entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="Open directions in Google Maps">Directions</a></p>
@@ -150,24 +147,7 @@
       window.addEventListener('resize', unlock);
       document.addEventListener('DOMContentLoaded', unlock);
 
-      // Video sound toggle
-      const video = document.getElementById('invite-video');
-      const soundBtn = document.getElementById('video-sound-toggle');
-      if (video && soundBtn){
-        soundBtn.addEventListener('click', async function(){
-          try{
-            video.muted = !video.muted;
-            if (!video.muted) {
-              await video.play().catch(() => {});
-              soundBtn.setAttribute('aria-pressed','true');
-              soundBtn.textContent = 'Sound off';
-            } else {
-              soundBtn.setAttribute('aria-pressed','false');
-              soundBtn.textContent = 'Sound on';
-            }
-          }catch(_){/* noop */}
-        });
-      }
+      // No loop, play once (default). Nothing else needed.
     })();
   </script>
 </body>
