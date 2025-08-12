@@ -12,18 +12,20 @@
       --bg:#f7f8fb; --ink:#1f2937; --muted:#6b7280;
       --brand:#6f8fb9; --ring:rgba(111,143,185,.3);
       --card:#ffffff; --radius:18px; --shadow:0 12px 30px rgba(17,24,39,.08);
+      /* Approx height for the mobile sticky CTA (used to size the Canva frame) */
+      --sticky-height: 76px;
     }
     *{box-sizing:border-box}
     html,body{min-height:100%; height:auto}
     body{margin:0; color:var(--ink); background:var(--bg); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial; -webkit-overflow-scrolling:touch}
-    .wrap{max-width:1000px; margin:0 auto; padding:24px 24px 140px}
+    .wrap{max-width:1000px; margin:0 auto; padding:clamp(16px,3vw,24px) clamp(16px,3vw,24px) clamp(80px,12vh,140px)}
     .hero{
       display:grid; gap:28px; align-items:center;
       grid-template-columns: 1.1fr .9fr;
       background: radial-gradient(1000px 500px at 120% -20%, #eaf0fb, transparent);
       border-radius: var(--radius); padding:32px; box-shadow: var(--shadow);
     }
-    .title{font-family:"Playfair Display",serif; font-size:42px; line-height:1.1; margin:0 0 8px}
+    .title{font-family:"Playfair Display",serif; font-size:clamp(28px,4vw,44px); line-height:1.1; margin:0 0 8px}
     .subtitle{color:var(--muted); margin:0 0 16px}
     .meta{display:flex; gap:18px; flex-wrap:wrap; margin:16px 0 28px}
     .pill{background:#fff; border:1px solid #e5e7eb; padding:10px 14px; border-radius:999px; font-weight:600}
@@ -36,19 +38,22 @@
     .photo img{width:100%; height:100%; object-fit:cover}
     .note{color:var(--muted); font-size:14px; margin-top:12px}
     .section{max-width:820px; margin:36px auto 0; text-align:center}
-    .section h2{font-family:"Playfair Display",serif; font-size:28px; margin:0 0 8px}
+    .section h2{font-family:"Playfair Display",serif; font-size:clamp(20px,2.8vw,28px); margin:0 0 8px}
     .embed{margin-top:18px}
     /* Canva: stage + frame for overlay CTA */
     .canva-stage{position:relative}
     /* Use portrait ratio 9:16 like Canva's embed snippet */
-    .canva-frame{width:100%; aspect-ratio: 9/16; border:0; border-radius:16px; overflow:hidden; background:#fff; box-shadow: var(--shadow)}
+    .canva-frame{width:100%; aspect-ratio: 9/16; border:0; border-radius:16px; overflow:hidden; background:#fff; box-shadow: var(--shadow); max-height:min(92dvh, 820px); margin:0 auto}
+    .canva-frame video{width:100%; height:100%; display:block; object-fit:cover; background:#000}
     .canva-overlay-cta{position:absolute; right:max(14px, env(safe-area-inset-right) + 12px); bottom:max(14px, env(safe-area-inset-bottom) + 12px); z-index:100; background:var(--brand); color:#fff; border:0; border-radius:999px; padding:14px 20px; font-weight:900; box-shadow:0 10px 22px rgba(17,24,39,.22); cursor:pointer}
     .canva-overlay-cta:focus{outline:3px solid var(--ring)}
+    .video-sound-toggle{position:absolute; left:max(14px, env(safe-area-inset-left) + 12px); bottom:max(14px, env(safe-area-inset-bottom) + 12px); z-index:100; background:rgba(31,41,55,.75); color:#fff; border:0; border-radius:999px; padding:10px 14px; font-weight:800; box-shadow:0 8px 18px rgba(17,24,39,.28); cursor:pointer; backdrop-filter: blur(4px)}
+    .video-sound-toggle:focus{outline:3px solid var(--ring)}
     /* Mobile: make Canva nearly full-screen (leaves room for sticky CTA) */
-    @media (max-width:600px){
+    @media (max-width:768px){
       .canva-frame{
         aspect-ratio:auto;
-        height: calc(100vh - 120px);
+        height: calc(100dvh - var(--sticky-height) - max(16px, env(safe-area-inset-bottom)) - max(12px, env(safe-area-inset-top)));
         width: 100vw;
         margin-left: calc(50% - 50vw);
         margin-right: calc(50% - 50vw);
@@ -68,20 +73,21 @@
     .modal header{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px}
     .modal h2{margin:0; font-family:"Playfair Display",serif; font-size:26px}
     .modal .modal-close{border:0; background:#f3f4f6; width:36px; height:36px; border-radius:8px; cursor:pointer; font-size:18px}
-    .modal .embed iframe{height:80vh}
+    .modal .embed iframe{height:min(80dvh, 720px); width:100%}
     body.no-scroll{overflow:hidden}
     /* Sticky bottom bar CTA */
     .sticky-cta{position:fixed; left:0; right:0; bottom:0; z-index:1100; padding: max(10px, env(safe-area-inset-bottom) + 8px) 16px  max(12px, env(safe-area-inset-bottom) + 14px);
-      background: linear-gradient(to top, rgba(255,255,255,.95), rgba(255,255,255,.8)); border-top:1px solid #e5e7eb; display:flex; justify-content:center}
-    .sticky-cta button{background:var(--brand); color:#fff; border:0; border-radius:999px; padding:16px 26px; font-weight:900; font-size:18px; box-shadow:0 12px 24px rgba(17,24,39,.18); cursor:pointer}
+      background: linear-gradient(to top, rgba(255,255,255,.95), rgba(255,255,255,.8)); border-top:1px solid #e5e7eb; display:none; justify-content:center}
+    .sticky-cta button{background:var(--brand); color:#fff; border:0; border-radius:999px; padding:16px 26px; font-weight:900; font-size:clamp(16px, 2.5vw, 18px); box-shadow:0 12px 24px rgba(17,24,39,.18); cursor:pointer}
     .sticky-cta button:focus{outline:3px solid var(--ring)}
-    @media (max-width:600px){ 
-      .wrap{padding:16px}
-      .section{margin:24px auto 0}
+    @media (max-width:768px){ 
+      .wrap{padding:12px 12px calc(var(--sticky-height) + 16px)}
+      .section{margin:20px auto 0}
       .address{font-size:14px}
-      .sticky-cta{display:none}
-      .sticky-cta button{width:100%; max-width:820px; font-size:17px; padding:14px 22px}
-      .canva-frame{aspect-ratio: 9/16; border-radius:12px; box-shadow: var(--shadow)}
+      .sticky-cta{display:flex}
+      .sticky-cta button{width:100%; max-width:820px; padding:14px 22px}
+      /* Hide overlay CTA on small screens since we show a sticky CTA */
+      .canva-overlay-cta{display:none}
     }
     @media (max-width:850px){
       .hero{grid-template-columns:1fr; padding:22px}
@@ -94,13 +100,9 @@
     <section class="section" id="intro-canva">
       <div class="canva-stage">
         <button type="button" class="canva-overlay-cta" data-open-rsvp="true">RSVP now</button>
-        <div class="canva-frame">
-        <iframe
-          src="https://www.canva.com/design/DAGv3YmAs5A/YsA5sJsdqQgR1HHShG2cmQ/view?embed"
-          allowfullscreen
-          loading="lazy"
-          title="Invitation">
-        </iframe>
+        <button type="button" class="video-sound-toggle" id="video-sound-toggle" aria-pressed="false" aria-label="Unmute video">Sound on</button>
+        <div class="canva-frame" aria-label="Invitation video">
+          <video id="invite-video" playsinline muted autoplay loop preload="auto" src="./Blue%20Watercolor%20Baby%20Baptism%20Invitation.mp4"></video>
         </div>
       </div>
       <p class="address"><a href="https://www.google.com/maps/place/Santuario+Santa+Maria+a+Mare/@40.6500664,14.6412516,17z/data=!3m1!4b1!4m6!3m5!1s0x133b9544093c35a3:0x35b98a06ca815918!8m2!3d40.6500664!4d14.6412516!16s%2Fg%2F1tdjfd25?hl=it-IT&entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="Open directions in Google Maps">Directions</a></p>
@@ -147,6 +149,25 @@
       window.addEventListener('orientationchange', unlock);
       window.addEventListener('resize', unlock);
       document.addEventListener('DOMContentLoaded', unlock);
+
+      // Video sound toggle
+      const video = document.getElementById('invite-video');
+      const soundBtn = document.getElementById('video-sound-toggle');
+      if (video && soundBtn){
+        soundBtn.addEventListener('click', async function(){
+          try{
+            video.muted = !video.muted;
+            if (!video.muted) {
+              await video.play().catch(() => {});
+              soundBtn.setAttribute('aria-pressed','true');
+              soundBtn.textContent = 'Sound off';
+            } else {
+              soundBtn.setAttribute('aria-pressed','false');
+              soundBtn.textContent = 'Sound on';
+            }
+          }catch(_){/* noop */}
+        });
+      }
     })();
   </script>
 </body>
