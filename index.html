@@ -42,23 +42,15 @@
     .embed{margin-top:18px}
     /* Canva: stage + frame for overlay CTA */
     .canva-stage{position:relative}
-    /* Responsive frame for Canva embed: default 16:9, mobile fills height */
-    .canva-frame{width:100%; aspect-ratio: var(--frame-ratio, 16/9); border:0; border-radius:16px; overflow:hidden; background:#fff; box-shadow: var(--shadow); margin:0 auto}
+    /* Responsive frame for Canva embed: Canva's recommended 16:9 wrapper */
+    .canva-frame{position:relative; width:100%; height:0; padding-top:56.25%; border:0; border-radius:16px; overflow:hidden; background:#fff; box-shadow: var(--shadow); margin:0 auto}
     .canva-overlay-cta{position:absolute; right:max(14px, env(safe-area-inset-right) + 12px); bottom:max(14px, env(safe-area-inset-bottom) + 12px); z-index:100; background:var(--brand); color:#fff; border:0; border-radius:999px; padding:14px 20px; font-weight:900; box-shadow:0 10px 22px rgba(17,24,39,.22); cursor:pointer}
     .canva-overlay-cta:focus{outline:3px solid var(--ring)}
     /* Mobile: make Canva nearly full-screen (leaves room for sticky CTA) */
     @media (max-width:768px){
-      .canva-frame{
-        aspect-ratio:auto;
-        height: calc(100dvh - var(--sticky-height) - max(16px, env(safe-area-inset-bottom)) - max(12px, env(safe-area-inset-top)));
-        width: 100vw;
-        margin-left: calc(50% - 50vw);
-        margin-right: calc(50% - 50vw);
-        border-radius: 0;
-        box-shadow: none;
-      }
+      .canva-frame{ border-radius:12px }
     }
-    .canva-frame iframe{width:100%; height:100%; border:0; display:block}
+    .canva-frame iframe{position:absolute; top:0; left:0; width:100%; height:100%; border:0; display:block}
     /* Address under Canva */
     .address{margin-top:10px; color:var(--muted)}
     .address a{color:var(--brand); font-weight:700; text-decoration:none}
@@ -100,7 +92,7 @@
         <div class="canva-frame" aria-label="Invitation">
           <iframe
             loading="lazy"
-            src="https://www.canva.com/design/DAGv3YmAs5A/YsA5sJsdqQgR1HHShG2cmQ/watch?embed"
+            src="https://www.canva.com/design/DAGv3YmAs5A/YsA5sJsdqQgR1HHShG2cmQ/view?embed"
             allowfullscreen
             title="Invitation">
           </iframe>
