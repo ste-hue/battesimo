@@ -40,8 +40,8 @@
     .embed{margin-top:18px}
     /* Canva: stage + frame for overlay CTA */
     .canva-stage{position:relative}
-    /* Match Canva design ratio to avoid letterboxing: 16:9 */
-    .canva-frame{width:100%; aspect-ratio: 16/9; border:0; border-radius:16px; overflow:hidden; background:#fff; box-shadow: var(--shadow)}
+    /* Use portrait ratio 9:16 like Canva's embed snippet */
+    .canva-frame{width:100%; aspect-ratio: 9/16; border:0; border-radius:16px; overflow:hidden; background:#fff; box-shadow: var(--shadow)}
     .canva-overlay-cta{position:absolute; right:max(14px, env(safe-area-inset-right) + 12px); bottom:max(14px, env(safe-area-inset-bottom) + 12px); z-index:100; background:var(--brand); color:#fff; border:0; border-radius:999px; padding:14px 20px; font-weight:900; box-shadow:0 10px 22px rgba(17,24,39,.22); cursor:pointer}
     .canva-overlay-cta:focus{outline:3px solid var(--ring)}
     /* Mobile: make Canva nearly full-screen (leaves room for sticky CTA) */
@@ -81,6 +81,7 @@
       .address{font-size:14px}
       .sticky-cta{display:none}
       .sticky-cta button{width:100%; max-width:820px; font-size:17px; padding:14px 22px}
+      .canva-frame{aspect-ratio: 9/16; border-radius:12px; box-shadow: var(--shadow)}
     }
     @media (max-width:850px){
       .hero{grid-template-columns:1fr; padding:22px}
