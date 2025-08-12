@@ -16,9 +16,9 @@
       --sticky-height: 76px;
     }
     *{box-sizing:border-box}
-    html,body{height:100%; min-height:100%}
-    body{margin:0; color:var(--ink); background:var(--bg); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial; -webkit-overflow-scrolling:touch; overflow:hidden}
-    .wrap{max-width:none; margin:0; padding:0}
+    html,body{min-height:100%; height:auto}
+    body{margin:0; color:var(--ink); background:var(--bg); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial; -webkit-overflow-scrolling:touch; overflow:auto}
+    .wrap{max-width:1000px; margin:0 auto; padding:clamp(16px,3vw,24px)}
     .hero{
       display:grid; gap:28px; align-items:center;
       grid-template-columns: 1.1fr .9fr;
@@ -37,21 +37,30 @@
     }
     .photo img{width:100%; height:100%; object-fit:cover}
     .note{color:var(--muted); font-size:14px; margin-top:12px}
-    .section{max-width:none; margin:0; text-align:center}
+    .section{max-width:1200px; margin:0 auto; text-align:center}
     .section h2{font-family:"Playfair Display",serif; font-size:clamp(20px,2.8vw,28px); margin:0 0 8px}
     .embed{margin-top:18px}
     /* Canva: stage + frame for overlay CTA */
     .canva-stage{position:relative}
-    /* Full-bleed hero video, fills viewport with no page scroll */
+    /* Hero video: desktop contained, mobile full-bleed */
     .canva-frame{
-      position:relative; width:100vw; height:100dvh;
-      margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
-      border:0; border-radius:0; overflow:hidden; background:#000; box-shadow:none;
+      position:relative; width:100%; height:clamp(520px, 80vh, 900px);
+      border:0; border-radius:16px; overflow:hidden; background:#000; box-shadow: var(--shadow);
+      margin:0 auto;
     }
     .canva-frame video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
     .canva-overlay-cta{position:absolute; right:max(14px, env(safe-area-inset-right) + 12px); bottom:max(14px, env(safe-area-inset-bottom) + 12px); z-index:100; background:var(--brand); color:#fff; border:0; border-radius:999px; padding:14px 20px; font-weight:900; box-shadow:0 10px 22px rgba(17,24,39,.22); cursor:pointer}
     .canva-overlay-cta:focus{outline:3px solid var(--ring)}
-    /* Mobile safe-areas are handled via env() in overlay controls */
+    /* Mobile: full-bleed */
+    @media (max-width:768px){
+      .wrap{padding:0}
+      .section{max-width:none}
+      .canva-frame{
+        width:100vw; height:100dvh;
+        margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+        border-radius:0; box-shadow:none;
+      }
+    }
     /* Address under Canva */
     .address{position:absolute; left:max(14px, env(safe-area-inset-left) + 12px); top:max(14px, env(safe-area-inset-top) + 12px); z-index:100; color:#fff; background:rgba(17,24,39,.4); backdrop-filter: blur(4px); padding:8px 12px; border-radius:10px}
     .address a{color:#fff; font-weight:700; text-decoration:none}
