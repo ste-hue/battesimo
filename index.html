@@ -18,6 +18,8 @@
       --card:#ffffff; --radius:18px; --shadow:0 12px 30px rgba(17,24,39,.08);
       /* Height for mobile sticky CTA */
       --sticky-height: 92px;
+      /* Offset used when sizing the 9:16 frame by viewport height */
+      --frame-vh-offset: 48px;
     }
     *{box-sizing:border-box}
     html,body{min-height:100%; height:auto}
@@ -54,9 +56,11 @@
     }
     /* Canva: stage + frame for overlay CTA */
     .canva-stage{position:relative}
-    /* Phone-like canvas: 9:16 artboard, scales with viewport height */
+    /* Phone-like canvas: 9:16 artboard, scales by both vw and vh to avoid overflow */
     .canva-frame{
-      position:relative; height:min(100dvh - 48px, 920px); aspect-ratio: 9 / 16; width:auto;
+      position:relative; aspect-ratio: 9 / 16;
+      width: min(560px, 92vw, calc((100dvh - var(--frame-vh-offset)) * 9 / 16));
+      height:auto;
       margin:0 auto; border:0; border-radius:8px; overflow:hidden; background:#4E7166; box-shadow: var(--shadow);
     }
     .canva-frame video{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; object-position:center; background:#4E7166 !important; display:block}
@@ -72,8 +76,7 @@
       body{overflow:auto}
       .wrap{padding:0}
       .section{max-width:none}
-      /* Fill phone viewport minus sticky CTA */
-      .canva-frame{height:calc(100dvh - var(--sticky-height) - 20px)}
+      :root{ --frame-vh-offset: calc(var(--sticky-height) + 20px); }
     }
     
     /* Address overlay anchored to the artboard bottom-right with bumper */
