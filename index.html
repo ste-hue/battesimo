@@ -79,8 +79,8 @@
       :root{ --frame-vh-offset: calc(var(--sticky-height) + 20px); }
     }
     
-    /* Address overlay anchored to the artboard bottom-right with bumper */
-    .address{position:absolute; right:max(14px, env(safe-area-inset-right) + 12px); bottom:max(8px, env(safe-area-inset-bottom) + 8px); left:auto; top:auto; transform:none; z-index:100; color:#fff; background:rgba(17,24,39,.45); backdrop-filter: blur(4px); padding:8px 12px; border-radius:10px; max-width:min(92vw, 420px); overflow-wrap:anywhere}
+    /* Address overlay anchored to the artboard bottom-right with dynamic bumper above CTA */
+    .address{position:absolute; right:max(14px, env(safe-area-inset-right) + 12px); bottom: var(--address-bottom, max(8px, env(safe-area-inset-bottom) + 8px)); left:auto; top:auto; transform:none; z-index:100; color:#fff; background:rgba(17,24,39,.45); backdrop-filter: blur(4px); padding:8px 12px; border-radius:10px; max-width:min(92vw, 420px); overflow-wrap:anywhere}
     .address a{color:#fff; font-weight:700; text-decoration:none}
     .address a:hover{text-decoration:underline}
     /* Modal RSVP */
@@ -173,6 +173,21 @@
       } catch(e) {}
 
       // No video: showing static image only
+      // Prevent overlap: if CTA is visible, lift address above it
+      try{
+        const frame = document.querySelector('.canva-frame');
+        const cta = frame?.querySelector('.canva-overlay-cta');
+        const address = frame?.querySelector('.address');
+        function updateAddressOffset(){
+          if (!cta || !address) return;
+          const rect = cta.getBoundingClientRect();
+          const bumperPx = Math.max(12, Math.round(rect.height * 0.6));
+          address.style.setProperty('--address-bottom', `calc(${Math.max(8, bumperPx)}px + env(safe-area-inset-bottom))`);
+        }
+        window.addEventListener('resize', updateAddressOffset);
+        window.addEventListener('orientationchange', updateAddressOffset);
+        setTimeout(updateAddressOffset, 0);
+      }catch(e){}
     })();
   </script>
 </body>
