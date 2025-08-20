@@ -61,6 +61,9 @@
     }
     .canva-frame video{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; object-position:center; background:#4E7166 !important; display:block}
     .canva-frame img{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; object-position:center; display:block}
+    .canva-frame .canva-embed{position:absolute; inset:0; width:100%; height:100%; border:0; display:none}
+    .canva-frame.is-embed .poster{display:none}
+    .canva-frame.is-embed .canva-embed{display:block}
     .is-hidden{opacity:0; visibility:hidden}
     @keyframes pulse-cta{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
     .canva-overlay-cta{position:absolute; right:max(14px, env(safe-area-inset-right) + 12px); bottom:max(14px, env(safe-area-inset-bottom) + 12px); z-index:100; background:var(--brand); color:#fff; border:0; border-radius:999px; padding:clamp(12px,3.8vw,16px) clamp(18px,4.6vw,26px); font-weight:900; font-size:clamp(15px,4vw,20px); box-shadow:0 12px 26px rgba(17,24,39,.28); cursor:pointer; max-width:calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 28px); white-space:normal; text-align:center; animation:pulse-cta 1.8s ease-in-out infinite}
@@ -103,6 +106,13 @@
         <button type="button" class="canva-overlay-cta" data-open-rsvp="true" aria-label="Apri modulo conferma">Conferma presenza</button>
         <div class="canva-frame" aria-label="Invito">
           <img class="poster" src="battesimo-it.jpeg" alt="Invito Battesimo" />
+          <iframe
+            class="canva-embed"
+            loading="lazy"
+            src="https://www.canva.com/design/DAGvhIH5vuM/W1bfngT3_tYdlC6aASELGg/watch?embed"
+            allowfullscreen
+            title="Invito Battesimo (Canva)"
+          ></iframe>
         </div>
         <p class="address"><a href="https://www.google.com/maps/place/Santuario+Santa+Maria+a+Mare/@40.6500664,14.6412516,17z/data=!3m1!4b1!4m6!3m5!1s0x133b9544093c35a3:0x35b98a06ca815918!8m2!3d40.6500664!4d14.6412516!16s%2Fg%2F1tdjfd25?hl=it-IT&entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="Apri indicazioni su Google Maps">Dove si trova</a></p>
       </div>
@@ -159,6 +169,13 @@
           const url = window.location.pathname + '?' + params.toString() + window.location.hash;
           window.location.replace(url);
           return;
+        }
+        // Toggle Canva embed only when ?embed=1 is present
+        const doEmbed = params.get('embed') === '1';
+        const frame = document.querySelector('.canva-frame');
+        if (frame) {
+          if (doEmbed) frame.classList.add('is-embed');
+          else frame.classList.remove('is-embed');
         }
       } catch(e) {}
 
