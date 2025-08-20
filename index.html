@@ -66,7 +66,7 @@
     .canva-frame.is-embed .canva-embed{display:block}
     .is-hidden{opacity:0; visibility:hidden}
     @keyframes pulse-cta{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
-    .canva-overlay-cta{position:absolute; right:max(14px, env(safe-area-inset-right) + 12px); bottom:max(14px, env(safe-area-inset-bottom) + 12px); z-index:100; background:var(--brand); color:#fff; border:0; border-radius:999px; padding:clamp(12px,3.8vw,16px) clamp(18px,4.6vw,26px); font-weight:900; font-size:clamp(15px,4vw,20px); box-shadow:0 12px 26px rgba(17,24,39,.28); cursor:pointer; max-width:calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 28px); white-space:normal; text-align:center; animation:pulse-cta 1.8s ease-in-out infinite}
+    .canva-overlay-cta{position:absolute; left:50%; right:auto; transform:translateX(-50%); bottom:max(14px, env(safe-area-inset-bottom) + 12px); z-index:100; background:var(--brand); color:#fff; border:0; border-radius:999px; padding:clamp(12px,3.8vw,16px) clamp(18px,4.6vw,26px); font-weight:900; font-size:clamp(15px,4vw,20px); box-shadow:0 12px 26px rgba(17,24,39,.28); cursor:pointer; max-width:calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 28px); white-space:normal; text-align:center; animation:pulse-cta 1.8s ease-in-out infinite}
     .canva-overlay-cta:focus{outline:3px solid var(--ring)}
     @media (max-width:768px){
       body{overflow:auto}
