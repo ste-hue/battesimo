@@ -73,8 +73,8 @@
       .canva-frame video{object-fit:contain}
     }
     
-    /* Address under Canva */
-    .address{position:absolute; left:max(14px, env(safe-area-inset-left) + 12px); top:max(14px, env(safe-area-inset-top) + 12px); z-index:100; color:#fff; background:rgba(17,24,39,.45); backdrop-filter: blur(4px); padding:8px 12px; border-radius:10px; max-width:min(92vw, 420px); overflow-wrap:anywhere}
+    /* Address overlay (left, vertically aligned near the mid-lower text) */
+    .address{position:absolute; left:max(14px, env(safe-area-inset-left) + 12px); top:58%; transform:translateY(-50%); z-index:100; color:#fff; background:rgba(17,24,39,.45); backdrop-filter: blur(4px); padding:8px 12px; border-radius:10px; max-width:min(92vw, 420px); overflow-wrap:anywhere}
     .address a{color:#fff; font-weight:700; text-decoration:none}
     .address a:hover{text-decoration:underline}
     /* Modal RSVP */
@@ -95,6 +95,10 @@
       .hero{grid-template-columns:1fr; padding:22px}
       .title{font-size:34px}
     }
+    /* Fine-tune vertical alignment on phones */
+    @media (max-width:768px){
+      .address{top:64%}
+    }
   </style>
 </head>
 <body>
@@ -105,8 +109,8 @@
         <div class="canva-frame" aria-label="Invito">
           <img src="battesimo.jpeg" alt="Invito Battesimo" />
         </div>
+        <p class="address"><a href="https://www.google.com/maps/place/Santuario+Santa+Maria+a+Mare/@40.6500664,14.6412516,17z/data=!3m1!4b1!4m6!3m5!1s0x133b9544093c35a3:0x35b98a06ca815918!8m2!3d40.6500664!4d14.6412516!16s%2Fg%2F1tdjfd25?hl=it-IT&entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="Apri indicazioni su Google Maps">Dove si trova</a></p>
       </div>
-      <p class="address"><a href="https://www.google.com/maps/place/Santuario+Santa+Maria+a+Mare/@40.6500664,14.6412516,17z/data=!3m1!4b1!4m6!3m5!1s0x133b9544093c35a3:0x35b98a06ca815918!8m2!3d40.6500664!4d14.6412516!16s%2Fg%2F1tdjfd25?hl=it-IT&entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="Apri indicazioni su Google Maps">Dove si trova</a></p>
       
     </section>
 
