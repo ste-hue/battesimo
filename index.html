@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="content-language" content="it" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
@@ -101,7 +102,7 @@
       <div class="canva-stage">
         <button type="button" class="canva-overlay-cta" data-open-rsvp="true" aria-label="Apri modulo conferma">Conferma presenza</button>
         <div class="canva-frame" aria-label="Invito">
-          <img class="poster" src="battesimo.jpeg?v=2" alt="Invito Battesimo" />
+          <img class="poster" src="battesimo.jpeg?v=3" alt="Invito Battesimo" />
         </div>
         <p class="address"><a href="https://www.google.com/maps/place/Santuario+Santa+Maria+a+Mare/@40.6500664,14.6412516,17z/data=!3m1!4b1!4m6!3m5!1s0x133b9544093c35a3:0x35b98a06ca815918!8m2!3d40.6500664!4d14.6412516!16s%2Fg%2F1tdjfd25?hl=it-IT&entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="Apri indicazioni su Google Maps">Dove si trova</a></p>
       </div>
@@ -150,6 +151,17 @@
       document.addEventListener('DOMContentLoaded', unlock);
 
       // No loop, play once (default). Nothing else needed.
+      // Force a one-time cache-busted load to avoid stale embeds on mobile
+      try {
+        const params = new URLSearchParams(window.location.search);
+        if (!params.has('v')) {
+          params.set('v', '3');
+          const url = window.location.pathname + '?' + params.toString() + window.location.hash;
+          window.location.replace(url);
+          return;
+        }
+      } catch(e) {}
+
       // No video: showing static image only
     })();
   </script>
