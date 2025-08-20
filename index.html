@@ -90,14 +90,14 @@
     .modal header{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px}
     .modal h2{margin:0; font-family:"Playfair Display",serif; font-size:26px}
     .modal .modal-close{border:0; background:#f3f4f6; width:36px; height:36px; border-radius:8px; cursor:pointer; font-size:18px}
-    .rsvp header{display:none}
+    .rsvp header{display:none !important}
     .rsvp .embed iframe{height:min(80dvh, 720px); width:100%}
     body.no-scroll{overflow:hidden}
     /* Sticky CTA (mobile-only) */
-    .sticky-cta{position:fixed; left:0; right:0; bottom:0; z-index:1100; padding: max(12px, env(safe-area-inset-bottom) + 12px) 16px; background: linear-gradient(to top, rgba(255,255,255,.98), rgba(255,255,255,.8)); border-top:1px solid #e5e7eb; box-shadow:0 -10px 24px rgba(17,24,39,.12); display:none; height: var(--sticky-height)}
+    .sticky-cta{position:fixed; left:0; right:0; bottom:0; z-index:1100; padding: max(12px, env(safe-area-inset-bottom) + 12px) 16px; background: linear-gradient(to top, rgba(255,255,255,.98), rgba(255,255,255,.8)); border-top:1px solid #e5e7eb; box-shadow:0 -10px 24px rgba(17,24,39,.12); display:flex; justify-content:center; height: var(--sticky-height)}
     .sticky-cta button{background:var(--brand); color:#fff; border:0; border-radius:999px; padding:16px 26px; font-weight:900; font-size:18px; box-shadow:0 12px 24px rgba(17,24,39,.18); cursor:pointer; animation:pulse-cta 2s ease-in-out infinite}
     .sticky-cta button:focus{outline:3px solid var(--ring)}
-    @media (max-width:768px){ .sticky-cta{display:flex; justify-content:center} .canva-overlay-cta{display:none} }
+    @media (max-width:768px){ .canva-overlay-cta{display:none} }
     @media (max-width:850px){
       .hero{grid-template-columns:1fr; padding:22px}
       .title{font-size:34px}
